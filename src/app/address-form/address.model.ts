@@ -6,8 +6,8 @@ export type AddressData = {
 };
 
 export const ADDRESS_DEFAULT: AddressData = {
-  addressLine1: '',
-  addressLine2: '',
-  zipCode: '',
-  city: '',
+  addressLine1: "",
+  addressLine2: "",
+  zipCode: "",
+  city: "",
 };
