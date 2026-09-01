@@ -1,29 +1,47 @@
-<div class="field">
-  <label>Course Title</label>
-  <input placeholder="Course title">
-  <div class="hint">0 / 60</div>
-</div>
-
-<div class="field">
-  <label>Category</label>
-  <select>
-    @for (cat of courseCategories(); track cat.code) {
-      <option [value]="cat.code">{{ cat.description }}</option>
+<form [formRoot]="step1Form">
+  <div class="field">
+    <label>Course Title</label>
+    <input placeholder="Course title" [formField]="step1Form.title" />
+    <div class="hint">{{ step1Model().title.length }} / 60</div>
+    <field-error [field]="step1Form.title()" />
+    @if (step1Form.title().pending()) {
+      <div class="hint">Checking availability...</div>
     }
-  </select>
-</div>
+  </div>
 
-<div class="field">
-  <label>Release Date</label>
-  <input type="date">
-</div>
+  <div class="field">
+    <label>Category</label>
+    <select [formField]="step1Form.category">
+      @for (cat of courseCategories(); track cat.code) {
+        <option [value]="cat.code">{{ cat.description }}</option>
+      }
+    </select>
+    <field-error [field]="step1Form.category()" />
+  </div>
 
-<div class="field inline">
-  <input type="checkbox" id="downloads">
-  <label for="downloads">Downloads allowed?</label>
-</div>
+  <div class="field">
+    <label>Release Date</label>
+    <input type="date" [formField]="step1Form.releasedAt" />
+    <field-error [field]="step1Form.releasedAt()" />
+  </div>
 
-<div class="field">
-  <label>Description</label>
-  <textarea placeholder="Course description" rows="4"></textarea>
-</div>
+  <div class="field inline">
+    <input
+      type="checkbox"
+      id="downloads"
+      [formField]="step1Form.downloadsAllowed"
+    />
+    <label for="downloads">Downloads allowed?</label>
+    <field-error [field]="step1Form.downloadsAllowed()" />
+  </div>
+
+  <div class="field">
+    <label>Description</label>
+    <textarea
+      [formField]="step1Form.longDescription"
+      placeholder="Course description"
+      rows="4"
+    ></textarea>
+    <field-error [field]="step1Form.longDescription()" />
+  </div>
+</form>
