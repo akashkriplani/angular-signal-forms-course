@@ -2,7 +2,6 @@
   <h2 class="profile-title">My Profile</h2>
 
   <div class="card profile-card">
-
     <div class="profile-avatar-bar">
       <div class="profile-avatar">
         <profile-avatar-icon />
@@ -13,19 +12,30 @@
     </div>
 
     <div class="profile-form">
-      <form>
-
+      <form [formRoot]="form">
         <div class="field">
           <label>Profile picture</label>
-          <input type="file" accept="image/*">
+          <file-upload
+            [formField]="form.avatarUrl"
+            requiredFileType="image/*"
+          />
         </div>
 
         <div class="field">
           <label for="email">Email address</label>
-          <input id="email" type="email" placeholder="your@email.com">
+          <input
+            id="email"
+            type="email"
+            [formField]="form.email"
+            placeholder="your@email.com"
+          />
+          @if (form.email().readonly()) {
+            <div class="hint">Email cannot be changed after registration.</div>
+          }
         </div>
 
         <!-- address-form component goes here -->
+        <address-form [formField]="form.address" legend="Billing Address" />
 
         <div class="form-actions">
           <button class="btn btn-primary" type="submit">
@@ -33,7 +43,6 @@
             Save profile
           </button>
         </div>
-
       </form>
     </div>
   </div>
@@ -41,22 +50,44 @@
 
 <div class="field-debug">
   <p>Email field state</p>
-  <p>value: {{ profileForm.email().value() }}</p>
-  <p>touched: {{ profileForm.email().touched() }}</p>
-  <p>dirty: {{ profileForm.email().dirty() }}</p>
-  <p>valid: {{ profileForm.email().valid() }}</p>
-  <p>invalid: {{ profileForm.email().invalid() }}</p>
-  <p>pending: {{ profileForm.email().pending() }}</p>
-  <p>errors: {{ profileForm.email().errors() | json }}</p>
+  <p>value: {{ form.email().value() }}</p>
+  <p>touched: {{ form.email().touched() }}</p>
+  <p>dirty: {{ form.email().dirty() }}</p>
+  <p>valid: {{ form.email().valid() }}</p>
+  <p>invalid: {{ form.email().invalid() }}</p>
+  <p>pending: {{ form.email().pending() }}</p>
+  <p>errors: {{ form.email().errors() | json }}</p>
+</div>
+
+<div class="field-debug">
+  <p>Avatar URL field state</p>
+  <p>value: {{ form.avatarUrl().value() }}</p>
+  <p>touched: {{ form.avatarUrl().touched() }}</p>
+  <p>dirty: {{ form.avatarUrl().dirty() }}</p>
+  <p>valid: {{ form.avatarUrl().valid() }}</p>
+  <p>invalid: {{ form.avatarUrl().invalid() }}</p>
+  <p>pending: {{ form.avatarUrl().pending() }}</p>
+  <p>errors: {{ form.avatarUrl().errors() | json }}</p>
+</div>
+
+<div class="field-debug">
+  <p>Address field state</p>
+  <p>value: {{ form.address().value() | json }}</p>
+  <p>touched: {{ form.address().touched() }}</p>
+  <p>dirty: {{ form.address().dirty() }}</p>
+  <p>valid: {{ form.address().valid() }}</p>
+  <p>invalid: {{ form.address().invalid() }}</p>
+  <p>pending: {{ form.address().pending() }}</p>
+  <p>errors: {{ form.address().errors() | json }}</p>
 </div>
 
 <div class="field-debug">
   <p>Form state</p>
-  <p>value: {{ profileForm().value() | json }}</p>
-  <p>touched: {{ profileForm().touched() }}</p>
-  <p>dirty: {{ profileForm().dirty() }}</p>
-  <p>valid: {{ profileForm().valid() }}</p>
-  <p>invalid: {{ profileForm().invalid() }}</p>
-  <p>pending: {{ profileForm().pending() }}</p>
-  <p>errors: {{ profileForm().errors() | json }}</p>
+  <p>value: {{ form().value() | json }}</p>
+  <p>touched: {{ form().touched() }}</p>
+  <p>dirty: {{ form().dirty() }}</p>
+  <p>valid: {{ form().valid() }}</p>
+  <p>invalid: {{ form().invalid() }}</p>
+  <p>pending: {{ form().pending() }}</p>
+  <p>errors: {{ form().errors() | json }}</p>
 </div>

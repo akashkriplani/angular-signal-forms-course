@@ -1,14 +1,32 @@
-
-<input type="file" class="file-input" [accept]="requiredFileType()" (change)="onFileSelected($event)" #fileUpload>
+<input
+  type="file"
+  class="file-input"
+  [accept]="requiredFileType()"
+  (change)="onFileSelected($event)"
+  #fileUpload
+/>
 
 <div class="file-upload-row">
   @if (value()) {
-    <img [src]="value()" alt="Preview" class="upload-preview">
+    <img [src]="value()" alt="Preview" class="upload-preview" />
   }
   <div class="field file-field">
-    <input [disabled]="true" [value]="fileName()" placeholder="No file chosen" readonly>
+    <input
+      [disabled]="true"
+      [value]="fileName()"
+      placeholder="No file chosen"
+      readonly
+    />
   </div>
-  <button class="btn-icon" type="button" (click)="onClick(fileUpload)" [disabled]="disabled()" title="Attach file">📎</button>
+  <button
+    class="btn-icon"
+    type="button"
+    (click)="onClick(fileUpload)"
+    [disabled]="disabled()"
+    title="Attach file"
+  >
+    📎
+  </button>
 </div>
 
 @if (uploadProgress() !== null) {

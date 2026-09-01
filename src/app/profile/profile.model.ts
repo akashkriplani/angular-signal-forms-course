@@ -1,4 +1,4 @@
-import { AddressData, ADDRESS_DEFAULT } from '../address-form/address.model';
+import { AddressData, ADDRESS_DEFAULT } from "../address-form/address.model";
 
 export type ProfileData = {
   email: string;
@@ -7,7 +7,7 @@ export type ProfileData = {
 };
 
 export const PROFILE_DEFAULT: ProfileData = {
-  email: '',
+  email: "example@gmail.com",
   avatarUrl: null,
-  address: { ...ADDRESS_DEFAULT }
+  address: { ...ADDRESS_DEFAULT },
 };

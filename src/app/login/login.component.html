@@ -1,34 +1,87 @@
 <div class="login-page">
   <div class="login-card">
-
     <div class="login-brand">
       <login-logo />
       <h1 class="login-title">Welcome back</h1>
       <p class="login-subtitle">Sign in to your account</p>
     </div>
 
-    <form class="login-form">
+    <form class="login-form" [formRoot]="form">
       <div class="field">
         <label for="email">Email address</label>
-        <input id="email" type="email" placeholder="your@email.com" autocomplete="email">
+        <input
+          id="email"
+          type="email"
+          placeholder="your@email.com"
+          autocomplete="email"
+          [formField]="form.email"
+        />
+        <field-error [field]="form.email()" />
       </div>
 
       <div class="field">
         <label for="password">Password</label>
-        <input id="password" type="password" placeholder="••••••••" autocomplete="current-password">
+        <input
+          id="password"
+          type="password"
+          placeholder="••••••••"
+          autocomplete="current-password"
+          [formField]="form.password"
+        />
+        <field-error [field]="form.password()" />
       </div>
 
       <div class="form-actions">
-        <button class="btn-login" type="submit">
+        <button
+          class="btn-login"
+          type="submit"
+          [disabled]="form().submitting()"
+        >
           <sign-in-icon />
-          Sign in
+          @if (form().submitting()) {
+            Signing in...
+          } @else {
+            Sign in
+          }
         </button>
-        <button class="btn-reset" type="button">
+        <button class="btn-reset" type="button" (click)="reset()">
           <reset-icon />
           Reset
         </button>
       </div>
     </form>
+  </div>
 
+  <div class="field-debug">
+    <p>Email field state</p>
+    <p>value: {{ form.email().value() | json }}</p>
+    <p>touched: {{ form.email().touched() }}</p>
+    <p>dirty: {{ form.email().dirty() }}</p>
+    <p>valid: {{ form.email().valid() }}</p>
+    <p>invalid: {{ form.email().invalid() }}</p>
+    <p>pending: {{ form.email().pending() }}</p>
+    <p>errors: {{ form.email().errors() | json }}</p>
+  </div>
+
+  <div class="field-debug">
+    <p>Password field state</p>
+    <p>value: {{ form.password().value() | json }}</p>
+    <p>touched: {{ form.password().touched() }}</p>
+    <p>dirty: {{ form.password().dirty() }}</p>
+    <p>valid: {{ form.password().valid() }}</p>
+    <p>invalid: {{ form.password().invalid() }}</p>
+    <p>pending: {{ form.password().pending() }}</p>
+    <p>errors: {{ form.password().errors() | json }}</p>
+  </div>
+
+  <div class="field-debug">
+    <p>Form state</p>
+    <p>value: {{ form().value() | json }}</p>
+    <p>touched: {{ form().touched() }}</p>
+    <p>dirty: {{ form().dirty() }}</p>
+    <p>valid: {{ form().valid() }}</p>
+    <p>invalid: {{ form().invalid() }}</p>
+    <p>pending: {{ form().pending() }}</p>
+    <p>errors: {{ form().errors() | json }}</p>
   </div>
 </div>
